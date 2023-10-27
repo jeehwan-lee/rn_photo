@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, Button, Text, StyleSheet } from "react-native";
+import Input, { KeyboardTypes, ReturnKeyTypes } from "../components/Input";
 import { AuthRoutes } from "../navigations/routes";
 
 const SignInScreen = () => {
@@ -9,6 +10,13 @@ const SignInScreen = () => {
   return (
     <View style={styles.container}>
       <Text>Sign In</Text>
+      <Input
+        title="Email"
+        iconName="email"
+        placeholder="your@email.com"
+        keyboardType={KeyboardTypes.EMAIL}
+        returnKeyType={ReturnKeyTypes.NEXT}
+      />
       <Button
         title="Sign Up"
         onPress={() => navigation.navigate(AuthRoutes.SIGN_UP)}
