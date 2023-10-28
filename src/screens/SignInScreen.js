@@ -2,8 +2,10 @@ import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useRef, useState } from "react";
 import { View, Text, StyleSheet, Keyboard } from "react-native";
 import Button from "../components/Button";
+import HR from "../components/HR";
 import Input, { KeyboardTypes, ReturnKeyTypes } from "../components/Input";
 import SafeInputView from "../components/SafeInputView";
+import TextButton from "../components/TextButton";
 import { AuthRoutes } from "../navigations/routes";
 
 const SignInScreen = () => {
@@ -66,6 +68,18 @@ const SignInScreen = () => {
               marginTop: 20,
             },
           }}
+        />
+        <HR
+          text={"OR"}
+          styles={{
+            container: {
+              marginVertical: 30,
+            },
+          }}
+        />
+        <TextButton
+          title="회원가입"
+          onPress={() => navigation.navigate(AuthRoutes.SIGN_UP)}
         />
       </View>
     </SafeInputView>

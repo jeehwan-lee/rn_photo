@@ -1,4 +1,4 @@
-import { Pressable, Text } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 import { PRIMARY } from "../colors";
 
 const TextButton = ({ styles, title, onPress, hitSlop }) => {
