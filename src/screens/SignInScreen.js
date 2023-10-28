@@ -32,7 +32,6 @@ const SignInScreen = () => {
   return (
     <SafeInputView>
       <View style={styles.container}>
-        <Text>Sign In</Text>
         <Input
           styles={{
             container: { marginBottom: 20, paddingHorizontal: 20 },
@@ -57,7 +56,7 @@ const SignInScreen = () => {
           onSubmitEditing={onSubmit}
         />
         <Button
-          title="Sign Up"
+          title="로그인"
           onPress={onSubmit}
           disabled={disabled}
           isLoading={isLoading}
