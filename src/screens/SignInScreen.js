@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
-import { View, Button, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
+import Button from "../components/Button";
 import Input, { KeyboardTypes, ReturnKeyTypes } from "../components/Input";
 import { AuthRoutes } from "../navigations/routes";
 
@@ -36,6 +37,12 @@ const SignInScreen = () => {
       <Button
         title="Sign Up"
         onPress={() => navigation.navigate(AuthRoutes.SIGN_UP)}
+        styles={{
+          container: {
+            paddingHorizontal: 20,
+            marginTop: 20,
+          },
+        }}
       />
     </View>
   );
