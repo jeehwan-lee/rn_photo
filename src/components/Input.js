@@ -28,6 +28,13 @@ const InputTypeProps = {
     secureTextEntry: true,
     iconName: { active: "lock", inactive: "lock-outline" },
   },
+  PASSWORD_CONFIRM: {
+    title: "PASSWORD CONFIRM",
+    placeholder: "PASSWORD CONFIRM",
+    keyboardType: "default",
+    secureTextEntry: true,
+    iconName: { active: "lock", inactive: "lock-outline" },
+  },
 };
 
 const Input = forwardRef(({ inputTypeProps, styles, ...props }, ref) => {
