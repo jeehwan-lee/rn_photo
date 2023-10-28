@@ -30,7 +30,7 @@ const InputTypeProps = {
   },
 };
 
-const Input = forwardRef(({ inputTypeProps, ...props }, ref) => {
+const Input = forwardRef(({ inputTypeProps, styles, ...props }, ref) => {
   const {
     title,
     placeholder,
@@ -43,11 +43,12 @@ const Input = forwardRef(({ inputTypeProps, ...props }, ref) => {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
-    <View style={defaultStyles.container}>
+    <View style={[defaultStyles.container, styles?.container]}>
       <Text
         style={[
           defaultStyles.title,
           { color: value || isFocused ? PRIMARY.DEFAULT : GRAY.DARK },
+          styles?.title,
         ]}
       >
         {title}
@@ -67,12 +68,13 @@ const Input = forwardRef(({ inputTypeProps, ...props }, ref) => {
               borderColor: value || isFocused ? PRIMARY.DEFAULT : GRAY.DARK,
               color: value || isFocused ? PRIMARY.DEFAULT : GRAY.DARK,
             },
+            styles?.input,
           ]}
           textContentType="none"
           autoCapitalize="none"
           autoCorrect={false}
         />
-        <View style={defaultStyles.icon}>
+        <View style={[defaultStyles.icon, styles?.icon]}>
           <MaterialCommunityIcons
             name={isFocused ? active : inactive}
             size={24}

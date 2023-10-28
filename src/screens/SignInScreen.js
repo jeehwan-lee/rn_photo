@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useState } from "react";
 import { View, Button, Text, StyleSheet } from "react-native";
 import Input, { KeyboardTypes, ReturnKeyTypes } from "../components/Input";
 import { AuthRoutes } from "../navigations/routes";
@@ -7,11 +7,32 @@ import { AuthRoutes } from "../navigations/routes";
 const SignInScreen = () => {
   const navigation = useNavigation();
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <View style={styles.container}>
       <Text>Sign In</Text>
-      <Input inputTypeProps="EMAIL" ReturnKeyTypes={ReturnKeyTypes.NEXT} />
-      <Input inputTypeProps="PASSWORD" ReturnKeyTypes={ReturnKeyTypes.DONE} />
+      <Input
+        styles={{
+          container: { marginBottom: 20, paddingHorizontal: 20 },
+          input: { borderWidth: 1 },
+        }}
+        value={email}
+        onChangeText={(text) => setEmail(text.trim())}
+        inputTypeProps="EMAIL"
+        ReturnKeyTypes={ReturnKeyTypes.NEXT}
+      />
+      <Input
+        styles={{
+          container: { marginBottom: 20, paddingHorizontal: 20 },
+          input: { borderWidth: 1 },
+        }}
+        value={password}
+        onCHangeText={(text) => setPassword(text.trim())}
+        inputTypeProps="PASSWORD"
+        ReturnKeyTypes={ReturnKeyTypes.DONE}
+      />
       <Button
         title="Sign Up"
         onPress={() => navigation.navigate(AuthRoutes.SIGN_UP)}
