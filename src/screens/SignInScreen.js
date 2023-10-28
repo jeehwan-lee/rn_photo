@@ -10,13 +10,8 @@ const SignInScreen = () => {
   return (
     <View style={styles.container}>
       <Text>Sign In</Text>
-      <Input
-        title="Email"
-        iconName="email"
-        placeholder="your@email.com"
-        keyboardType={KeyboardTypes.EMAIL}
-        returnKeyType={ReturnKeyTypes.NEXT}
-      />
+      <Input inputTypeProps="EMAIL" ReturnKeyTypes={ReturnKeyTypes.NEXT} />
+      <Input inputTypeProps="PASSWORD" ReturnKeyTypes={ReturnKeyTypes.DONE} />
       <Button
         title="Sign Up"
         onPress={() => navigation.navigate(AuthRoutes.SIGN_UP)}
