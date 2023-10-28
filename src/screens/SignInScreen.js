@@ -1,6 +1,6 @@
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { View, Text, StyleSheet, Keyboard, Image } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { WHITE } from "../colors";
@@ -21,6 +21,17 @@ const SignInScreen = () => {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [disabled, setDisabled] = useState(true);
+
+  useFocusEffect(
+    useCallback(() => {
+      return () => {
+        setEmail("");
+        setPassword("");
+        setIsLoading(false);
+        setDisabled(true);
+      };
+    }, [])
+  );
 
   useEffect(() => {
     setDisabled(!email || !password);
