@@ -7,9 +7,9 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { View, Text, StyleSheet, Keyboard, Image } from "react-native";
+import { View, Text, StyleSheet, Keyboard, Image, Alert } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { signIn } from "../api/auth";
+import { getAuthErrorMessages, signIn } from "../api/auth";
 import { WHITE } from "../colors";
 import Button from "../components/Button";
 import HR from "../components/HR";
@@ -55,8 +55,13 @@ const SignInScreen = () => {
     if (!form.disabled && !form.isLoading) {
       dispatch({ type: AuthFormTypes.TOGGLE_LOADING });
 
-      const user = await signIn(form);
-      console.log(user);
+      try {
+        const user = await signIn(form);
+        console.log(user);
+      } catch (e) {
+        const message = getAuthErrorMessages(e.code);
+        Alert.alert("로그인 실패", message);
+      }
 
       dispatch({ type: AuthFormTypes.TOGGLE_LOADING });
     }
