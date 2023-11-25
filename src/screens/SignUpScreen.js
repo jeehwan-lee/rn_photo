@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useReducer, useRef, useState } from "react";
-import { View, Text, StyleSheet, Keyboard, Image } from "react-native";
+import { View, Text, StyleSheet, Keyboard, Image, Alert } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { WHITE } from "../colors";
 import Button from "../components/Button";
@@ -15,6 +15,8 @@ import {
   AuthFormTypes,
   initAuthForm,
 } from "../reducers/authFormReducer";
+import { useUserState } from "../context/UserContext";
+import { getAuthErrorMessages, signUp } from "../api/auth";
 
 const SignUpScreen = () => {
   const navigation = useNavigation();
@@ -24,13 +26,14 @@ const SignUpScreen = () => {
   const passwordConfirmRef = useRef();
 
   const [form, dispatch] = useReducer(authFormReducer, initAuthForm);
+  const [, setUser] = useUserState();
 
   const updateform = (payload) => {
     const newForm = { ...form, ...payload };
     const disabled =
       !newForm.email ||
       !newForm.password ||
-      newForm.password !== newform.passwordConfirm;
+      newForm.password !== newForm.passwordConfirm;
 
     dispatch({
       type: AuthFormTypes.UPDATE_FORM,
@@ -38,11 +41,19 @@ const SignUpScreen = () => {
     });
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     Keyboard.dismiss();
 
     if (!form.disabled && !form.isLoading) {
       dispatch({ type: AuthFormTypes.TOGGLE_LOADING });
+
+      try {
+        const user = await signUp(form);
+        setUser(user);
+      } catch (e) {
+        const message = getAuthErrorMessages(e.code);
+        Alert.alert("회원가입 실패", message);
+      }
       console.log(form.email, form.password);
       dispatch({ type: AuthFormTypes.TOGGLE_LOADING });
     }
@@ -68,7 +79,7 @@ const SignUpScreen = () => {
               input: { borderWidth: 1 },
             }}
             value={form.email}
-            onChangeText={(text) => updateForm({ email: text.trim() })}
+            onChangeText={(text) => updateform({ email: text.trim() })}
             inputTypeProps="EMAIL"
             ReturnKeyTypes={ReturnKeyTypes.NEXT}
             onSubmitEditing={() => passwordRef.current.focus()}
@@ -80,7 +91,7 @@ const SignUpScreen = () => {
               input: { borderWidth: 1 },
             }}
             value={form.password}
-            onChangeText={(text) => updateForm({ password: text.trim() })}
+            onChangeText={(text) => updateform({ password: text.trim() })}
             inputTypeProps="PASSWORD"
             ReturnKeyTypes={ReturnKeyTypes.DONE}
             onSubmitEditing={() => passwordConfirmRef.current.focus()}
