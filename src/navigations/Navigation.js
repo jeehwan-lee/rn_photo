@@ -2,8 +2,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { useEffect } from "react";
 import { initFirebase } from "../api/firebase";
 import AuthStack from "./AuthStack";
+import { useUserState } from "../context/UserContext";
+import MainStack from "./MainStack";
 
 const Navigation = () => {
+  const [user] = useUserState();
+
   useEffect(() => {
     (async () => {
       try {
@@ -16,9 +20,10 @@ const Navigation = () => {
       }
     })();
   }, []);
+
   return (
     <NavigationContainer>
-      <AuthStack />
+      {user.uid ? <MainStack /> : <AuthStack />}
     </NavigationContainer>
   );
 };

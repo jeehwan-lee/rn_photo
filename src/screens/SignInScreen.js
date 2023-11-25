@@ -22,6 +22,7 @@ import {
   AuthFormTypes,
   initAuthForm,
 } from "../reducers/authFormReducer";
+import { useUserState } from "../context/UserContext";
 
 const SignInScreen = () => {
   const navigation = useNavigation();
@@ -30,6 +31,8 @@ const SignInScreen = () => {
   const passwordRef = useRef();
 
   const [form, dispatch] = useReducer(authFormReducer, initAuthForm);
+
+  const [, setUser] = useUserState();
 
   useFocusEffect(
     useCallback(() => {
@@ -57,7 +60,7 @@ const SignInScreen = () => {
 
       try {
         const user = await signIn(form);
-        console.log(user);
+        setUser(user);
       } catch (e) {
         const message = getAuthErrorMessages(e.code);
         Alert.alert("로그인 실패", message);
