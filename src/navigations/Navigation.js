@@ -4,6 +4,7 @@ import { initFirebase } from "../api/firebase";
 import AuthStack from "./AuthStack";
 import { useUserState } from "../context/UserContext";
 import MainStack from "./MainStack";
+import ContentTab from "./ContentTab";
 
 const Navigation = () => {
   const [user] = useUserState();
@@ -23,7 +24,7 @@ const Navigation = () => {
 
   return (
     <NavigationContainer>
-      {user.uid ? <MainStack /> : <AuthStack />}
+      {user.uid ? <ContentTab /> : <AuthStack />}
     </NavigationContainer>
   );
 };
