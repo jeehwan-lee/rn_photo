@@ -3,12 +3,17 @@ import {
   signInWithEmailAndPassword,
   AuthErrorCodes,
   createUserWithEmailAndPassword,
+  signOut as signOutFirebase,
 } from "firebase/auth";
 
 export const signIn = async ({ email, password }) => {
   const { user } = await signInWithEmailAndPassword(getAuth(), email, password);
 
   return user;
+};
+
+export const signOut = async () => {
+  await signOutFirebase(getAuth());
 };
 
 export const getAuthErrorMessages = (errorCode) => {

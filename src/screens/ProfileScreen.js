@@ -1,3 +1,4 @@
+import { signOut } from "../api/auth";
 import { useUserState } from "../context/UserContext";
 import { View, Text, StyleSheet, Button } from "react-native";
 
@@ -7,7 +8,13 @@ const ProfileScreen = () => {
   return (
     <View style={styles.container}>
       <Text>Profile</Text>
-      <Button title="로그아웃" onPress={() => setUser({})} />
+      <Button
+        title="로그아웃"
+        onPress={async () => {
+          await signOut();
+          setUser({});
+        }}
+      />
     </View>
   );
 };
