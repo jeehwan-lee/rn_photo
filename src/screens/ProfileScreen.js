@@ -3,7 +3,8 @@ import { useUserState } from "../context/UserContext";
 import { View, Text, StyleSheet, Button } from "react-native";
 
 const ProfileScreen = () => {
-  const [, setUser] = useUserState();
+  const [user, setUser] = useUserState();
+  console.log(user.uid, user.displayName, user.photoURL);
 
   return (
     <View style={styles.container}>
