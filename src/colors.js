@@ -9,4 +9,5 @@ export const PRIMARY = {
 
 export const GRAY = {
   DARK: "#687280",
+  DEFAULT: "#D1D5DB",
 };
