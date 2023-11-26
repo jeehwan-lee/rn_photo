@@ -6,7 +6,7 @@ import { UserProvider } from "./context/UserContext";
 const App = () => {
   LogBox.ignoreLogs([
     "You are initializing Firebase Auth for React Native without providing AsyncStorage.",
-    "@firebase/auth:Auth",
+    "@firebase/auth",
   ]);
   return (
     <>
