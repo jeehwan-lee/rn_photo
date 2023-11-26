@@ -24,7 +24,7 @@ const Navigation = () => {
 
   return (
     <NavigationContainer>
-      {user.uid ? <ContentTab /> : <AuthStack />}
+      {user.uid ? <MainStack /> : <AuthStack />}
     </NavigationContainer>
   );
 };
